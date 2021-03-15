@@ -3,7 +3,7 @@ import Logo from "../../Logo/Logo.js";
 import NavigationItems from "../NavigationItems/NavigationItems.js";
 import classes from "./SideDrawer.module.css";
 import Backdrop from "../../UI/Backdrop/Backdrop.js";
-import Aux from "../../../hoc/Auxiliar.js";
+import Aux from "../../../hoc/Auxiliar/Auxiliar.js";
 
 const sideDrawer = (props) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
