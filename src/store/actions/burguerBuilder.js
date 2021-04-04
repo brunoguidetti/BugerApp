@@ -2,7 +2,6 @@ import * as actionTypes from "./actionTypes.js";
 import axios from "../../axios-orders.js";
 
 export const addIngredient = (name) => {
-  console.log(name);
   return {
     type: actionTypes.ADD_INGREDIENT,
     ingredientsName: name,
@@ -33,7 +32,6 @@ export const initIngredients = () => {
     axios
       .get("/ingredients.json")
       .then((res) => {
-        console.log(res);
         dispatch(setIngredients(res.data));
       })
       .catch((error) => {

@@ -7,7 +7,7 @@ import Input from "../../../components/UI/Input/Input.js";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler.js";
 import * as actions from "../../../store/actions/index.js";
-import { updateObject } from "../../../shared/utility.js";
+import { updateObject, checkValidity } from "../../../shared/utility.js";
 
 class ContactData extends Component {
   state = {
@@ -61,7 +61,6 @@ class ContactData extends Component {
 
   orderHandler = (e) => {
     e.preventDefault();
-    console.log(this.props.price);
 
     const formData = {};
     for (let formElIdentifier in this.state.orderForm) {
@@ -77,26 +76,10 @@ class ContactData extends Component {
     this.props.onOrderBurger(order, this.props.token);
   };
 
-  checkValidity(value, rules) {
-    // console.log(value, rules);
-    let isValid = true;
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    // if(rules.minLenght){
-    //   isValid= value.length >= rules.minLenght
-    // }
-
-    return isValid;
-  }
-
   inputChangedHandler = (event, inputID) => {
-    console.log(event.target.value);
-
     const updatedFormEl = updateObject(this.state.orderForm[inputID], {
       value: event.target.value,
-      valid: this.checkValidity(
+      valid: checkValidity(
         event.target.value,
         this.state.orderForm[inputID].validation
       ),
@@ -109,7 +92,6 @@ class ContactData extends Component {
     let formIsValid = true;
     for (let inputID in updatedOrderForm) {
       formIsValid = updatedOrderForm[inputID].valid && formIsValid;
-      console.log(updatedOrderForm[inputID], inputID);
     }
 
     this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
